@@ -1,0 +1,15 @@
+bootstrapServers: localhost:9092
+clientId: TestProducer
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+
+logging:
+  level: INFO
+  loggers:
+    eu.hammarback: DEBUG
