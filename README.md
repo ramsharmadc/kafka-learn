@@ -13,4 +13,4 @@
 
 ## Post a message to the producer
 
-    curl -H "Content-Type: application/json" -X POST -d '{"some-key":"some-value"}' http://localhost:8080/my-topic
+    curl -H "Content-Type: application/json" -X POST -d "{'some-key': 'some-value', 'message': 'Hello'}" http://localhost:8080/my-topic
