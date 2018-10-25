@@ -15,48 +15,48 @@ import java.util.Properties;
 
 public class KafkaMessageConsumer implements MessageConsumer {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final String topicName;
-    private final Properties configProperties;
-    private final int pollTimeoutMs = 100;
-    private final List<MessageListener> listeners = new ArrayList<>();
+  private final Logger logger = LoggerFactory.getLogger(this.getClass());
+  private final String topicName;
+  private final Properties configProperties;
+  private final int pollTimeoutMs = 100;
+  private final List<MessageListener> listeners = new ArrayList<>();
 
-    private KafkaConsumer<String, String> consumer;
+  private KafkaConsumer<String, String> consumer;
 
-    public KafkaMessageConsumer(String topicName, Properties configProperties) {
-        this.topicName = topicName;
-        this.configProperties = configProperties;
-    }
+  public KafkaMessageConsumer(String topicName, Properties configProperties) {
+    this.topicName = topicName;
+    this.configProperties = configProperties;
+  }
 
-    public void addListener(MessageListener listener) {
-        this.listeners.add(listener);
-    }
+  public void addListener(MessageListener listener) {
+    this.listeners.add(listener);
+  }
 
-    @Override
-    public void start() throws Exception {
-        this.consumer = new KafkaConsumer<>(configProperties);
-        this.consumer.subscribe(ImmutableList.of(topicName));
+  @Override
+  public void start() {
+    this.consumer = new KafkaConsumer<>(configProperties);
+    this.consumer.subscribe(ImmutableList.of(topicName));
 
-        new Thread(() -> {
-            try {
-                while (true) {
-                    ConsumerRecords<String, String> records = consumer.poll(pollTimeoutMs);
-                    for (ConsumerRecord<String, String> record : records) {
-                        listeners.forEach(listener -> listener.onMessage(record.value()));
-                    }
-                }
-            } catch (WakeupException ex) {
-                logger.info("Consumer thread stopped");
-            } finally {
-                consumer.close();
-            }
-        }).start();
-    }
+    new Thread(() -> {
+      try {
+        while (true) {
+          ConsumerRecords<String, String> records = consumer.poll(pollTimeoutMs);
+          for (ConsumerRecord<String, String> record : records) {
+            listeners.forEach(listener -> listener.onMessage(record.value()));
+          }
+        }
+      } catch (WakeupException ex) {
+        logger.info("Consumer thread stopped");
+      } finally {
+        consumer.close();
+      }
+    }).start();
+  }
 
-    @Override
-    public void stop() throws Exception {
-        logger.info("Shutting down consumer...");
-        consumer.wakeup();
-    }
+  @Override
+  public void stop() {
+    logger.info("Shutting down consumer...");
+    consumer.wakeup();
+  }
 
 }

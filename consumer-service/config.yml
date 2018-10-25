@@ -3,11 +3,11 @@ clientId: TestConsumer
 
 server:
   applicationConnectors:
-    - type: http
-      port: 8090
+  - type: http
+    port: 8090
   adminConnectors:
-    - type: http
-      port: 8091
+  - type: http
+    port: 8091
 
 logging:
   level: INFO

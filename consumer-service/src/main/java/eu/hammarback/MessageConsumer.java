@@ -4,12 +4,12 @@ import io.dropwizard.lifecycle.Managed;
 
 public interface MessageConsumer extends Managed {
 
-    void addListener(MessageListener listener);
+  void addListener(MessageListener listener);
 
-    interface MessageListener {
+  interface MessageListener {
 
-        void onMessage(String message);
+    void onMessage(String message);
 
-    }
+  }
 
 }
