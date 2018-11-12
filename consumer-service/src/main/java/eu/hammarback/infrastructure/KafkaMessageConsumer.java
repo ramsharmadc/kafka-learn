@@ -9,6 +9,7 @@ import org.apache.kafka.common.errors.WakeupException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -40,7 +41,7 @@ public class KafkaMessageConsumer implements MessageConsumer {
     new Thread(() -> {
       try {
         while (true) {
-          ConsumerRecords<String, String> records = consumer.poll(pollTimeoutMs);
+          ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(pollTimeoutMs));
           for (ConsumerRecord<String, String> record : records) {
             listeners.forEach(listener -> listener.onMessage(record.value()));
           }
