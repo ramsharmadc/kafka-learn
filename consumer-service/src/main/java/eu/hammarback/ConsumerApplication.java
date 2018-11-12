@@ -8,7 +8,7 @@ import java.util.Properties;
 
 import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 
-public class ConsumerApplication extends Application<ConsumerConfiguration> implements MessageConsumer.MessageListener {
+public class ConsumerApplication extends Application<ConsumerConfiguration> {
 
   @Override
   public void run(final ConsumerConfiguration config, final Environment environment) {
@@ -20,13 +20,8 @@ public class ConsumerApplication extends Application<ConsumerConfiguration> impl
     configProperties.put(VALUE_DESERIALIZER_CLASS_CONFIG, config.valueDeserializer);
 
     MessageConsumer messageConsumer = new KafkaMessageConsumer(config.topicName, configProperties);
-    messageConsumer.addListener(this);
+    messageConsumer.addListener(message -> System.out.println("message received = " + message));
     environment.lifecycle().manage(messageConsumer);
-  }
-
-  @Override
-  public void onMessage(String message) {
-    System.out.println("message received = " + message);
   }
 
   public static void main(final String[] args) throws Exception {
