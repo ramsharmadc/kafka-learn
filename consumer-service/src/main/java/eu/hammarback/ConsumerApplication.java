@@ -3,12 +3,16 @@ package eu.hammarback;
 import eu.hammarback.infrastructure.KafkaMessageConsumer;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
 import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 
 public class ConsumerApplication extends Application<ConsumerConfiguration> {
+
+  private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @Override
   public void run(final ConsumerConfiguration config, final Environment environment) {
@@ -20,7 +24,7 @@ public class ConsumerApplication extends Application<ConsumerConfiguration> {
     configProperties.put(VALUE_DESERIALIZER_CLASS_CONFIG, config.valueDeserializer);
 
     MessageConsumer messageConsumer = new KafkaMessageConsumer(config.topicName, configProperties);
-    messageConsumer.addListener(message -> System.out.println("message received = " + message));
+    messageConsumer.addListener(message -> logger.info("message received = " + message));
     environment.lifecycle().manage(messageConsumer);
   }
 
