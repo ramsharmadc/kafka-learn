@@ -7,8 +7,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>eu.hammarback</groupId>
-    <artifactId>kafkatest</artifactId>
+    <groupId>simpleapps.kafkapoc</groupId>
+    <artifactId>kafkapoc</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
 
@@ -19,7 +19,7 @@
   <name>MessageProducer</name>
 
   <properties>
-    <mainClass>eu.hammarback.ProducerApplication</mainClass>
+    <mainClass>simpleapps.kafkapoc.EmployeeProducerApplication</mainClass>
   </properties>
 
   <dependencies>

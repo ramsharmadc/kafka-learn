@@ -12,4 +12,4 @@ server:
 logging:
   level: INFO
   loggers:
-    eu.hammarback: DEBUG
+    simpleapps.kafkapoc: DEBUG

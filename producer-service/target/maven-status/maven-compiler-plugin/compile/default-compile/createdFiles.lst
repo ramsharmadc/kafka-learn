@@ -1,0 +1,12 @@
+simpleapps\kafkapoc\CustomerProducerApi.class
+simpleapps\kafkapoc\CustomerProducerApplication.class
+simpleapps\kafkapoc\EmployeeProducerApplication.class
+simpleapps\kafkapoc\MessageProducer.class
+simpleapps\kafkapoc\producer\CustomerProducer.class
+simpleapps\kafkapoc\EmployeeProducerApi.class
+simpleapps\kafkapoc\EmployeeSerializer.class
+simpleapps\kafkapoc\producer\EmployeeProducer.class
+simpleapps\kafkapoc\ProducerConfiguration.class
+simpleapps\kafkapoc\Customer.class
+simpleapps\kafkapoc\Employee.class
+simpleapps\kafkapoc\CustomerSerializer.class
